@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package calculator;
+option go_package = "calculatorpb";
+
+message SumRequest {
+    int32 first_number = 1;
+    int32 second_number = 2;
+}
+
+message SumResponse {
+    int32 sum_result = 1;
+}
+
+message PrimeRequest {
+    int32 number = 1;
+}
+
+message PrimeResponse {
+    int32 prime_factor = 1;
+}
+
+message ComputeAverageRequest {
+    int32 number = 1;
+}
+
+message ComputeAverageResponse {
+    double average = 1;
+}
+
+message FindMaximumRequest {
+    int32 number = 1;
+}
+
+message FindMaximumResponse {
+    int32 maximum = 1;
+}
+
+message SquareRootRequest {
+    int32 number = 1;
+}
+
+message SquareRootResponse {
+    double number = 1;
+}
+
+service CalculatorService {
+    // Unary
+    rpc Sum(SumRequest) returns (SumResponse) {};
+    // Server Streaming
+    rpc Prime(PrimeRequest) returns (stream PrimeResponse) {};
+    // Client Streaming
+    rpc ComputeAverage(stream ComputeAverageRequest) returns (ComputeAverageResponse) {};
+    // Bi-directional Streaming
+    rpc FindMaximum(stream FindMaximumRequest) returns (stream FindMaximumResponse) {};
+
+    rpc SquareRoot(SquareRootRequest) returns (SquareRootResponse) {};
+}
